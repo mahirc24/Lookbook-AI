@@ -1,0 +1,20 @@
+output_type: on_model
+label: On-Model Photoshoot
+stages:
+  - name: extract_attributes
+    type: attribute_extraction        # Gemini vision on the uploaded flatlay
+  - name: build_prompt
+    type: prompt_builder              # assembles the composition instruction
+    prompt_template: >-
+      Create a photorealistic, full-body editorial on-model fashion photograph.
+      Dress the model in the GARMENT product image: a {color} {fabric} {garment}.
+      Keep the garment's exact design, colour and details. Use the MODEL
+      reference for the person's face, skin tone and build (a {ethnicity} {age}
+      {body_type} model). Match the POSE reference ({pose}). Place them in a
+      {background} setting matching the BACKGROUND reference. Professional studio
+      lighting, sharp focus, realistic fabric drape, high detail. Output a single
+      image.
+  - name: render
+    type: onmodel_compose             # Gemini 2.5 Flash Image multi-reference compose
+    size: [1024, 1024]
+    heading: ON-MODEL

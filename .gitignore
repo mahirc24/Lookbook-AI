@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Env / secrets
+.env
+
+# Runtime data (db, uploads, generated assets)
+backend/data/lookbook.db
+backend/data/uploads/
+backend/data/outputs/
+
+# Node / frontend (added later)
+node_modules/
+dist/
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+
+# build artifacts
+*.tsbuildinfo

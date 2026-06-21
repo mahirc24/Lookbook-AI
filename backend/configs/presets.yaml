@@ -1,0 +1,128 @@
+# Selectable presets for the create flow (model / background / pose).
+# Config-driven: the frontend renders cards from this; editing here changes the UI.
+# A model preset expands into ethnicity/age/body_type on the brand kit.
+
+models:
+  - id: sa_20s_athletic
+    label: "South Asian · 20s · Athletic"
+    ethnicity: South Asian
+    age: 20s
+    body_type: athletic
+    image: https://i.pinimg.com/736x/6a/7a/b2/6a7ab29aed52a02b3d2a4359ab3521f1.jpg
+  - id: ea_20s_slim
+    label: "East Asian · 20s · Slim"
+    ethnicity: East Asian
+    age: 20s
+    body_type: slim
+  - id: black_30s_average
+    label: "Black · 30s · Average"
+    ethnicity: Black
+    age: 30s
+    body_type: average
+    image: https://i.pinimg.com/736x/bb/f1/75/bbf175692591314ea0c0d63930b33a5c.jpg
+  - id: cauc_30s_curvy
+    label: "Caucasian · 30s · Curvy"
+    ethnicity: Caucasian
+    age: 30s
+    body_type: curvy
+    image: https://i.pinimg.com/736x/60/d4/a6/60d4a66b191702f4f151ddb2788541fe.jpg
+  - id: hispanic_20s_plus
+    label: "Hispanic · 20s · Plus-size"
+    ethnicity: Hispanic
+    age: 20s
+    body_type: plus-size
+  - id: me_40s_athletic
+    label: "Middle Eastern · 40s · Athletic"
+    ethnicity: Middle Eastern
+    age: 40s
+    body_type: athletic
+
+# Backgrounds are grouped by `category` (studio | lifestyle); the frontend
+# renders one labelled section per category.
+backgrounds:
+  - id: studio_white_seamless
+    label: White Seamless
+    value: white seamless studio backdrop
+    category: studio
+    image: https://i.pinimg.com/736x/02/e8/ae/02e8ae4a5c14327729afb94171b269c8.jpg
+  - id: studio_grey_seamless
+    label: Grey Seamless
+    value: grey seamless studio backdrop
+    category: studio
+    image: https://i.pinimg.com/736x/a8/a6/38/a8a6386d5af390c19803188dde1ea058.jpg
+  - id: studio_beige_backdrop
+    label: Beige Backdrop
+    value: beige paper studio backdrop
+    category: studio
+    image: https://i.pinimg.com/736x/89/ca/62/89ca62048f48b6334ef375344e8904ec.jpg
+  - id: studio_warm_gradient
+    label: Warm Gradient
+    value: warm gradient studio backdrop
+    category: studio
+    image: https://i.pinimg.com/736x/ca/52/26/ca5226cc1938ca422038b8ae02987ebb.jpg
+  - id: studio_color_pop
+    label: Color Pop
+    value: bold colored studio backdrop
+    category: studio
+    image: https://i.pinimg.com/736x/4a/f0/6a/4af06a84dd4f82326ec9d2bcaa495e1a.jpg
+  - id: studio_textured
+    label: Textured Wall
+    value: textured concrete studio wall
+    category: studio
+    image: https://i.pinimg.com/736x/f0/f0/ea/f0f0ea5b517c27d1e259e2be007e17c2.jpg
+  - id: lifestyle_urban_street
+    label: Urban Street
+    value: urban street
+    category: lifestyle
+    image: https://i.pinimg.com/736x/4e/cc/d8/4eccd87a1726b948322d2bb0007430ed.jpg
+  - id: lifestyle_cafe
+    label: Cafe Interior
+    value: cafe interior
+    category: lifestyle
+    image: https://i.pinimg.com/736x/08/ac/24/08ac24f82d0bca0f593f76632a8ad176.jpg
+  - id: lifestyle_outdoor_nature
+    label: Outdoor Nature
+    value: outdoor nature
+    category: lifestyle
+    image: https://i.pinimg.com/736x/c7/77/3e/c7773e0543beba757dae218cbca37b51.jpg
+  - id: lifestyle_luxury_interior
+    label: Luxury Interior
+    value: luxury interior
+    category: lifestyle
+    image: https://i.pinimg.com/736x/6a/f8/ad/6af8ada8514f2af4a65c3e158f252f95.jpg
+  - id: lifestyle_beach
+    label: Beach
+    value: beach golden hour
+    category: lifestyle
+    image: https://i.pinimg.com/736x/60/1e/41/601e411ea01ed9e6a6700754dee9b11c.jpg
+  - id: lifestyle_rooftop
+    label: City Rooftop
+    value: city rooftop golden hour
+    category: lifestyle
+    image: https://i.pinimg.com/736x/cb/94/2b/cb942b8ad51c6f4b41ddb51ff1d0cd8b.jpg
+
+poses:
+  - id: standing_front
+    label: Standing (front)
+    value: standing front
+    image: https://i.pinimg.com/736x/ab/d8/99/abd89918c4cc0de61826b5ef6fa3dbcf.jpg
+  - id: three_quarter
+    label: Three-quarter
+    value: three-quarter turn
+    image: https://i.pinimg.com/1200x/e5/4d/86/e54d860de9d6c356008f056e642d7078.jpg
+  - id: walking
+    label: Walking
+    value: walking mid-stride
+    image: https://i.pinimg.com/1200x/5c/44/ff/5c44ff32e65e16cb1e0a169f1f5ad043.jpg
+  - id: seated
+    label: Seated
+    value: seated relaxed
+    image: https://i.pinimg.com/736x/18/59/48/185948786bbf0d66d57aeadcae91d6e3.jpg
+  - id: back_view
+    label: Back view
+    value: back view over-shoulder
+    image: https://i.pinimg.com/736x/85/16/34/851634eb37f23b2c4f4150c13d4e09b1.jpg
+  - id: hands_on_hips
+    label: Hands on hips
+    value: hands on hips confident
+    image: https://i.pinimg.com/1200x/ec/e0/f4/ece0f4007ede9482314ac4625941d3be.jpg

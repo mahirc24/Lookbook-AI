@@ -1,0 +1,15 @@
+output_type: ghost_mannequin
+label: Ghost Mannequin
+stages:
+  - name: extract_attributes
+    type: attribute_extraction
+  - name: build_prompt
+    type: prompt_builder
+    prompt_template: >-
+      ghost mannequin product shot of {color} {fabric} {garment}, invisible
+      mannequin showing 3D garment shape, {background} background,
+      {lighting} lighting, e-commerce catalog style
+  - name: render
+    type: sdxl_render                 # Phase 4: rembg mask + SDXL inpaint
+    size: [1024, 1024]
+    heading: GHOST MANNEQUIN

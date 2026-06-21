@@ -1,0 +1,12 @@
+# Brand guidelines — defined once, reused across every output type.
+# The frontend sends this as the `brand_kit` JSON; this file is a reference/default.
+ethnicity: South Asian
+age: 20s
+body_type: athletic
+color_palette:
+  - "#1A4D2E"      # deep green
+  - "#F5EFE6"      # cream
+  - "#E8B04B"      # gold
+background: studio seamless
+scene: minimal studio
+lighting: soft diffused

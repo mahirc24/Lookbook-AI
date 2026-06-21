@@ -1,0 +1,14 @@
+output_type: banner
+label: Marketing Banner
+stages:
+  - name: extract_attributes
+    type: attribute_extraction
+  - name: build_prompt
+    type: prompt_builder
+    prompt_template: >-
+      wide marketing banner background for {color} {garment}, {scene},
+      {lighting} lighting, {background} background, space for headline text
+  - name: compose
+    type: banner_compose              # Phase 4: SDXL background + Pillow text layout
+    size: [1280, 720]
+    heading: BANNER

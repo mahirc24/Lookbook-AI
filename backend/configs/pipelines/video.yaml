@@ -1,0 +1,15 @@
+output_type: video
+label: Promo Video
+stages:
+  - name: extract_attributes
+    type: attribute_extraction
+  - name: build_prompt
+    type: prompt_builder
+    prompt_template: >-
+      promo hero frame of {color} {fabric} {garment}, {scene}, {lighting}
+      lighting, {background} background, cinematic
+  - name: animate
+    type: kenburns_video              # ffmpeg Ken Burns over the still (no GPU)
+    size: [1024, 1024]
+    duration_s: 3
+    heading: PROMO
