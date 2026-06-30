@@ -47,32 +47,3 @@ export async function getJob(id: string): Promise<Job> {
   const { data } = await http.get<Job>(`/jobs/${id}`);
   return data;
 }
-
-export interface PuterReferences {
-  garment: string | null;
-  model: string | null;
-  pose: string | null;
-  background: string | null;
-}
-
-/** Create a job for browser-side (Puter) generation; returns base64 reference images. */
-export async function createPuterJob(
-  input: CreateJobInput,
-): Promise<{ id: string; status: string; references: PuterReferences }> {
-  const form = new FormData();
-  form.append("output_types", JSON.stringify(input.outputTypes));
-  form.append("brand_kit", JSON.stringify(input.brandKit));
-  if (input.productUrl) form.append("product_url", input.productUrl);
-  if (input.image) form.append("image", input.image);
-  const { data } = await http.post("/jobs/puter", form);
-  return data;
-}
-
-/** Upload a client-generated image and mark the job's asset completed. */
-export async function uploadResult(id: string, outputType: string, blob: Blob): Promise<Job> {
-  const form = new FormData();
-  form.append("output_type", outputType);
-  form.append("image", blob, `${outputType}.png`);
-  const { data } = await http.put<Job>(`/jobs/${id}/result`, form);
-  return data;
-}

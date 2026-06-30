@@ -5,7 +5,7 @@ import {
   Box, Button, Center, Circle, Container, Flex, HStack, Heading, SimpleGrid, Spinner,
   Text, VStack, useToast,
 } from "@chakra-ui/react";
-import { createPuterJob, uploadResult, getPresets } from "../api/client";
+import { createJob, getPresets } from "../api/client";
 import type { BrandKit, ModelPreset, OptionPreset } from "../types";
 import Layout from "../components/Layout";
 import FlatlayUpload from "../components/FlatlayUpload";
@@ -32,10 +32,6 @@ export default function CreateWizard() {
 
   async function generate() {
     if (!image || !model || !background || !pose) return;
-    if (typeof puter === "undefined") {
-      toast({ title: "Generator not loaded", description: "Puter.js failed to load — check your connection.", status: "error" });
-      return;
-    }
     const brandKit: BrandKit = {
       ethnicity: model.ethnicity,
       age: model.age,
@@ -49,19 +45,7 @@ export default function CreateWizard() {
     };
     setSubmitting(true);
     try {
-      // 1. Record the job + get reference images as base64 (backend dodges CORS).
-      const { id, references } = await createPuterJob({ outputTypes: ["on_model"], brandKit, image });
-      // 2. Generate the on-model shot in the browser via Puter (nano-banana, keyless).
-      const inputs = [references.garment, references.model, references.pose, references.background]
-        .filter((x): x is string => !!x);
-      const prompt = buildPrompt(model, pose, background);
-      const imgEl = await puter.ai.txt2img(prompt, {
-        model: "gemini-2.5-flash-image-preview",
-        input_images: inputs,
-      });
-      // 3. Upload the generated image back so it shows in the gallery.
-      const blob = await (await fetch(imgEl.src)).blob();
-      await uploadResult(id, "on_model", blob);
+      const { id } = await createJob({ outputTypes: ["on_model"], brandKit, image });
       navigate(`/jobs/${id}`);
     } catch (e: any) {
       toast({ title: "Failed to generate", description: e?.message ?? String(e), status: "error" });
@@ -182,20 +166,6 @@ function StepHeader({ step }: { step: number }) {
 
 function CardGrid({ children }: { children: React.ReactNode }) {
   return <SimpleGrid columns={{ base: 2, md: 3 }} spacing={4}>{children}</SimpleGrid>;
-}
-
-/** Composition instruction for the multi-reference generator. Images are passed
- *  in order: 1=garment, 2=model, 3=pose, 4=background. */
-function buildPrompt(model: ModelPreset, pose: OptionPreset, background: OptionPreset): string {
-  return [
-    "Create a photorealistic, full-body editorial on-model fashion photograph.",
-    "Image 1 is the GARMENT product — dress the model in it, keeping its exact design, colour and details.",
-    "Image 2 is the MODEL — use this person's face, skin tone and build.",
-    "Image 3 is the POSE reference — match this body pose and framing.",
-    "Image 4 is the BACKGROUND — place the model in a scene like this.",
-    `The model is a ${model.ethnicity} ${model.age} ${model.body_type} person, in a ${pose.value} pose, on a ${background.value} background.`,
-    "Professional studio lighting, sharp focus, realistic fabric drape, high detail. Output a single image.",
-  ].join(" ");
 }
 
 /** Group option presets by `category` (preserving first-seen order); uncategorized fall under "Other". */

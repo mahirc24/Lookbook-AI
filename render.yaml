@@ -1,0 +1,28 @@
+
+services:
+  - type: web
+    name: lookbook-backend
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.4
+      # Required — generation is server-side Gemini only (no fallback)
+      - key: LOOKBOOK_GEMINI_API_KEY
+        sync: false
+      # Must include your deployed frontend origin, comma-separated
+      - key: LOOKBOOK_CORS_ORIGINS
+        sync: false
+      # S3 storage — required in prod so generated images survive restarts
+      - key: LOOKBOOK_S3_BUCKET
+        sync: false
+      - key: LOOKBOOK_S3_REGION
+        value: us-east-1
+      - key: LOOKBOOK_S3_ACCESS_KEY_ID
+        sync: false
+      - key: LOOKBOOK_S3_SECRET_ACCESS_KEY
+        sync: false

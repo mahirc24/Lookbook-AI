@@ -20,8 +20,21 @@ class Settings(BaseSettings):
     gemini_text_model: str = "gemini-2.5-flash"          # garment attribute extraction
     gemini_image_model: str = "gemini-2.5-flash-image"   # on-model composition ("nano-banana")
 
+    # S3 (or S3-compatible) object storage. When a bucket + keys are set, uploads
+    # and generated assets go to the bucket; otherwise they fall back to local disk.
+    s3_bucket: str = ""
+    s3_region: str = "us-east-1"
+    s3_access_key_id: str = ""
+    s3_secret_access_key: str = ""
+    s3_endpoint_url: str = ""        # optional: set for S3-compatible providers (R2/B2); blank = AWS
+    s3_public_base_url: str = ""     # optional: CDN/custom domain in front of the bucket
+
     data_dir: Path = BACKEND_DIR / "data"
     config_dir: Path = BACKEND_DIR / "configs"
+
+    @property
+    def s3_enabled(self) -> bool:
+        return bool(self.s3_bucket and self.s3_access_key_id and self.s3_secret_access_key)
 
     @property
     def uploads_dir(self) -> Path:

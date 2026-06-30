@@ -144,9 +144,8 @@ def onmodel_compose(ctx: dict, cfg: dict) -> dict:
         bg_url=brand.get("background_image"),
         prompt=ctx.get("prompt") or "Photorealistic on-model fashion photograph.",
     )
-    out = storage.job_output_dir(ctx["job_id"]) / f"{ctx['output_type']}.png"
-    out.write_bytes(data)
-    return {"output_path": out, "url": storage.media_url(out)}
+    url = storage.save_output(ctx["job_id"], ctx["output_type"], data)
+    return {"output_path": None, "url": url}
 
 
 # --- Phase 3 (TODO: SDXL on MPS) ---------------------------------------------
